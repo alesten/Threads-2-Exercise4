@@ -6,6 +6,9 @@ import java.util.logging.Logger;
 
 public class Tester {
   public static void main(String[] args) {
+      
+      new DeadLockDetector().start();
+      
     try {
       ResourceContainer resources = new ResourceContainer();
       ResourceUser1 t1 = new ResourceUser1(resources);
@@ -24,3 +27,11 @@ public class Tester {
     }
   }
 }
+
+/*
+    Programmet giver en deadlock efter threads prøver at få 
+    resources men den anden ikke har givet slip på dem endnu
+
+    I stedet for at unlock begge resources på en gang
+    tager jeg og unlocker dem når de ikke længere er brugt
+*/
